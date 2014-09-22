@@ -1,0 +1,35 @@
+<table class="table table-hover">
+<thead>
+  <th>Category Name</th>
+</thead>
+  <tbody>
+  <% @categories.each do |cat| %>
+  <tr>
+    <td>
+     <%= link_to "#{cat.name} (#{cat.articles.count})", category_path(cat) %>
+    </td>
+  </tr>
+      <% end %>
+  </tbody>
+</table>
+
+
+    <table class="table table-hover">
+      <thead>
+      <th>User Name</th>
+      <th>User Email</th>
+      </thead>
+      <tbody>
+      <% @users.each do |user| %>
+      <tr>
+        <td>
+          <%= user.name %>
+        </td>
+        <td>
+          <%= user.email %>
+        </td>
+      </tr>
+          <% end %>
+      </tbody>
+    </table>
+

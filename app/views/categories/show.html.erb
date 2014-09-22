@@ -1,0 +1,14 @@
+<table class="table table-hover">
+  <thead>
+  <th><%= @category.name %></th>
+  </thead>
+  <tbody>
+  <% @category.articles.each do |art| %>
+      <tr>
+        <td>
+          <%= art.title %>
+        </td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>
