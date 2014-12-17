@@ -1,10 +1,20 @@
 Rails.application.routes.draw do
 
-  get 'landing/index'
+  get 'comments/create'
 
+  get 'comments/update'
+
+  get 'comments/destroy'
+
+  get 'landing/index'
+  resources :articles
   resources :categories do
-    resources :articles
+    resources :articles do
+      resources :comments
+    end
   end
+
+
   resources :users do
     resources :articles
   end

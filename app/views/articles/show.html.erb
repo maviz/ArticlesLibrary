@@ -1,4 +1,6 @@
-<p id="notice"><%= notice %></p>
+<% content_for :back do %>
+    <%= link_to "Back", :back  %>
+<% end %>
 
 <p>
   <strong>Title:</strong>
@@ -23,6 +25,48 @@
 <p>
   <strong>Published at:</strong>
   <%= @article.published_at %>
+</p>
+
+
+<p>
+  <strong>Comments:</strong><br/>
+  <% if  @article.comments.empty? %>
+   <ul id="comments"><li>
+     No comments !!!
+   </li>
+     <li>
+       <%= form_tag("/comments/create?article_id=#{@article.id}", method: 'get', :remote => true) do %>
+           <%= label_tag :body, "Comment:" %>
+           <%= text_field_tag :body  %>
+           <%= label_tag :name, "By:" %>
+           <%= text_field_tag :name %>
+           <%= label_tag :email, "Email:" %>
+           <%= text_field_tag :email %>
+           <%= submit_tag "Add Comment.." %>
+       <% end %>
+     </li>
+   </ul>
+  <% else %>
+     <ul id="comments">
+      <% @article.comments.each do |com| %>
+      <% next if com.body.nil? %>
+      <li>
+        <%= (com.body + "... by #{com.name.empty? ? 'Anonymous' : com.name }")  %>
+      </li>
+      <% end %>
+       <li>
+         <%= form_tag("/comments/create?article_id=#{@article.id}", method: 'get', :remote => true) do %>
+             <%= label_tag :body, "Comment:" %>
+             <%= text_field_tag :body  %>
+             <%= label_tag :name, "By:" %>
+             <%= text_field_tag :name %>
+             <%= label_tag :email, "Email:" %>
+             <%= text_field_tag :email %>
+             <%= submit_tag "Add Comment.." %>
+       <% end %>
+        </li>
+     </ul>
+  <% end %>
 </p>
 
 <%= link_to 'Edit', edit_article_path(@article) %> |

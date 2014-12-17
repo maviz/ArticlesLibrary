@@ -1,0 +1,15 @@
+<table>
+  <thead>
+  <tr>
+    <th>Title</th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% @articles.each do |article| %>
+      <tr>
+        <td><%= link_to article.long_title,article_path(article) %></td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>

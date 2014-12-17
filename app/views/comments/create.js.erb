@@ -1,0 +1,4 @@
+my_from = $("#comments").find('li:last').html();
+$("#comments").find('li:last').remove();
+$("#comments").append("<li><%= (@comment.body + "... by #{@comment.name.empty? ? 'Anonymous' : @comment.name }")  %></li>");
+$("#comments").append("<li>"+ my_from + "</li>");

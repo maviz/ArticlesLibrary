@@ -48,13 +48,14 @@
         <a class="navbar-brand" href="<%= root_path %>">Maviz Cheema Blog !!!</a>
         <div class="navbar-collapse collapse navbar-responsive-collapse">
           <ul class="nav navbar-nav">
-            <li><%= link_to "Link1", "/path1"  %></li>
+            <li><%= link_to "Link", '#'  %></li>
           </ul>
         </div>
       </div>
     </div>
 
     <div class="container">
+      <%= yield(:back) %>
       <div class="row">
         <div class="col-lg-9">
           <%= bootstrap_flash %>
@@ -64,8 +65,8 @@
           <div class="well sidebar-nav">
             <h3>Sidebar</h3>
             <ul class="nav nav-list">
-              <li class="nav-header">Sidebar</li>
-              <li><%= link_to "Link1", "/path1"  %></li>
+              <li class="nav-header">Quick Actions</li>
+              <li><%= link_to "Add new article", new_article_path  %></li>
               <li><%= link_to "Link2", "/path2"  %></li>
               <li><%= link_to "Link3", "/path3"  %></li>
             </ul>

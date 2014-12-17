@@ -1,10 +1,21 @@
 class ArticlesController < ApplicationController
   before_action :set_article, only: [:show, :edit, :update, :destroy]
 
+  layout 'basic'
   # GET /articles
   # GET /articles.json
   def index
     @articles = Article.all
+    unless params[:user_id].nil?
+      @articles = @articles.where(:user_id => params[:user_id])
+    end
+    if params[:uncat].present?
+      @articles = @articles.joins('LEFT JOIN articles_categories ON articles.id=articles_categories.article_id').where('articles_categories.category_id IS NULL');
+    end
+    respond_to do |format|
+      format.js
+      format.html
+    end
   end
 
   # GET /articles/1
@@ -25,9 +36,9 @@ class ArticlesController < ApplicationController
   # POST /articles.json
   def create
     @article = Article.new(article_params)
-
     respond_to do |format|
       if @article.save
+        @article.categories << Category.find_by_id(params[:category]) unless (params[:category] == '0')
         format.html { redirect_to @article, notice: 'Article was successfully created.' }
         format.json { render :show, status: :created, location: @article }
       else

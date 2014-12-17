@@ -2,6 +2,6 @@ class LandingController < ApplicationController
   layout 'basic'
   def index
     @users = User.all
-    @categories = Category.all.includes(:articles)
+    @categories = Category.includes(:articles)
   end
 end
